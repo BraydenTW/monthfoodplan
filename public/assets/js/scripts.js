@@ -140,8 +140,6 @@ function addFavListItem(div) {
         decideModal(".edit-modal", "block");
         document.getElementById("editFav").addEventListener("click", e => {
             let selectText = fav.textContent;
-            console.log(selectText);
-            console.log(linkEditInput.value);
             let textLink = linkEditInput.value;
             document.querySelectorAll(".day li").forEach(item => {
                 if (selectText === item.textContent) {
@@ -152,7 +150,6 @@ function addFavListItem(div) {
                     let linkArray = month[index].day.food.split(",");
                     let arrayIndex = foodArray.indexOf(item.textContent);
                     linkArray[arrayIndex] = textLink;
-                    console.log(month[index].day.link);
                     month[index].day.link = linkArray.toString();
                 }
             });
@@ -242,18 +239,7 @@ function makeNodeItemSetup(index, cssPath) {
     } else {
         star1.setAttribute("class", "far fa-star");
     }
-    star1.addEventListener("click", e => {
-        starEventListener(div1, star1);
-    });
-    node1.addEventListener("click", e => {
-        nodeEventListener(div1, index);
-    });
-    node1.addEventListener("mouseover", e => {
-        title1.style = "display: block;";
-    });
-    node1.addEventListener("mouseout", e => {
-        title1.style = "display: none;";
-    });
+    
     let finLink1 = document.createElement("A");
     
     if (favs.favorites.includes(node1.textContent)) {
@@ -264,7 +250,6 @@ function makeNodeItemSetup(index, cssPath) {
                 linkText = item.nextElementSibling.getAttribute("href");
             }
         });
-        console.log(linkText);
         finLink1.setAttribute("href", linkText);
     } else {
         finLink1.setAttribute("href", month[index].day.link.split(",")[month[index].day.link.split(",").length - 2]);
@@ -276,6 +261,18 @@ function makeNodeItemSetup(index, cssPath) {
     div1.appendChild(finLink1);
     div1.appendChild(star1);
     document.querySelector("." + cssPath + " ul").appendChild(div1);
+    star1.addEventListener("click", e => {
+        starEventListener(div1, star1);
+    });
+    node1.addEventListener("click", e => {
+        nodeEventListener(div1, index);
+    });
+    div1.addEventListener("mouseover", e => {
+        title1.style = "display: block; opacity: 1;";
+    });
+    div1.addEventListener("mouseout", e => {
+        title1.style = "display: none; opacity: 0;";
+    });
 }
 
 function publishMeal(day, meal, link) {
@@ -283,7 +280,6 @@ function publishMeal(day, meal, link) {
     month[index].day.food +=  "," + meal + ",";
     month[index].day.link += "," + link + ",";
     let finArray = month[index].day.food.split(",");
-    console.log(month[index].day.food);
     if (document.querySelector("." + day + " ul").children.length != 0) {
         finArray.pop();
         finArray.pop();
@@ -502,24 +498,24 @@ for (let iOut = 0; iOut < 35; iOut++) { // Display items
             div.appendChild(star);
             document.querySelector("." + relDay + " ul").appendChild(div);
 
+            
             star.addEventListener("click", e => {
                 starEventListener(div, star);
             });
             node.addEventListener("click", e => {
                 nodeEventListener(div, iOut);
             });
-            node.addEventListener("mouseover", e => {
-                title.style = "display: block;";
+            div.addEventListener("mouseover", e => {
+                title.style = "display: block; opacity: 1;";
             });
-            node.addEventListener("mouseout", e => {
-                title.style = "display: none;";
+            div.addEventListener("mouseout", e => {
+                title.style = "display: none; opacity: 0;";
             });
         }
     }   
 }
 
 
-console.log(month[0].day.food);
 
 for (let i = 1; i < favs.favorites.split(",").length; i++) {
     if (favs.favorites.split(",")[i] === null || favs.favorites.split(",")[i] === "") {
@@ -540,8 +536,6 @@ for (let i = 1; i < favs.favorites.split(",").length; i++) {
             document.getElementById("editFav").addEventListener("click", e => {
                 
                 let selectText = fav.textContent;
-                console.log(selectText);
-                console.log(linkEditInput.value);
                 let textLink = linkEditInput.value;
                 document.querySelectorAll(".day li").forEach(item => {
                     if (selectText === item.textContent) {
@@ -552,7 +546,6 @@ for (let i = 1; i < favs.favorites.split(",").length; i++) {
                         let linkArray = month[index].day.food.split(",");
                         let arrayIndex = foodArray.indexOf(item.textContent);
                         linkArray[arrayIndex] = textLink;
-                        console.log(month[index].day.link);
                         month[index].day.link = linkArray.toString();
                     }
                 });
@@ -576,7 +569,6 @@ for (let i = 1; i < favs.favorites.split(",").length; i++) {
 
 document.querySelectorAll("#favOutput ul li").forEach((item) => {  // FAV Links all the same
     let selectText = item.textContent;
-    console.log(item.textContent);
     let gotFirst = true;
     let textLink = "";
     document.querySelectorAll(".day li").forEach(item2 => {
@@ -606,4 +598,22 @@ document.querySelectorAll(".day ul").forEach(item => {
 });
 document.querySelectorAll(".day a").forEach((item, index) => {
     item.setAttribute("target", "_blank");
+});
+document.querySelectorAll(".move-icons").forEach((item, index) => {
+    let navPosition = 0;
+    item.firstElementChild.addEventListener("click", () => {
+        if (navPosition < 0) {
+            navPosition += 30;
+            console.log(navPosition);
+            document.querySelectorAll(".day ul")[index].style = "margin-top: " + navPosition + "px;";
+        }
+    });
+    item.lastElementChild.addEventListener("click", () => {
+        if (navPosition * -1 != document.querySelectorAll(".day ul")[index].childElementCount * 30 - 120) {
+            navPosition -= 30;
+            console.log(navPosition);
+            document.querySelectorAll(".day ul")[index].style = "margin-top: " + navPosition + "px;";
+        }
+        
+    });
 });
