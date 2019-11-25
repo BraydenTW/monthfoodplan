@@ -257,9 +257,9 @@ function makeNodeItemSetup(index, cssPath) {
     finLink1.setAttribute("target", "_blank");
     finLink1.appendChild(link1);
     div1.appendChild(title1);
-    div1.appendChild(node1);
-    div1.appendChild(finLink1);
     div1.appendChild(star1);
+    div1.appendChild(finLink1);
+    div1.appendChild(node1);
     document.querySelector("." + cssPath + " ul").appendChild(div1);
     star1.addEventListener("click", e => {
         starEventListener(div1, star1);
@@ -493,9 +493,9 @@ for (let iOut = 0; iOut < 35; iOut++) { // Display items
             finLink.setAttribute("href", month[iOut].day.link.split(",")[month[iOut].day.food.split(",").indexOf(node.textContent)]);
             finLink.appendChild(link);
             div.appendChild(title);
-            div.appendChild(node);
-            div.appendChild(finLink);
             div.appendChild(star);
+            div.appendChild(finLink);
+            div.appendChild(node);
             document.querySelector("." + relDay + " ul").appendChild(div);
 
             
