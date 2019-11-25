@@ -456,6 +456,7 @@
             echo 'var jsonData = ' . json_encode($jsonData) . ';';
             echo '</script>';
         ?>
+    
         <script src="./public/assets/js/scripts.js" async defer></script>
         <script>
         
@@ -477,11 +478,9 @@
                 firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
                 lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
             } else {
-                console.log("hi");
                 firstDay = new Date(date.getFullYear(), date.getMonth() + 1, 1);
                 lastDay = new Date(date.getFullYear(), date.getMonth() + 2, 0);
             }
-            console.log(firstDay.getDate() + " " + lastDay.getDate());
             var dayName = days[firstDay.getDay()];
             
             for (let i = days.indexOf(days[firstDay.getDay()]); i < 35; i++) {
@@ -494,8 +493,6 @@
             var cMonth2 = months[d.getMonth() + 1];
 
             const defaultMonthJson = jsonData[3].month;
-
-            console.log(defaultMonthJson);
 
             if (cMonth1 != info.month1) {
                 jsonData[1].month = jsonData[2].month;
