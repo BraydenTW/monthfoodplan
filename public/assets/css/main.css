@@ -72,6 +72,9 @@ body {
 
 .day ul {
   margin-left: -20px;
+  margin-top: 0px;
+  -webkit-transition: margin-top 0.4s;
+  transition: margin-top 0.4s;
 }
 
 .day:hover button {
@@ -166,7 +169,8 @@ select {
   display: flex;
   -ms-flex-line-pack: center;
       align-content: center;
-  margin: -10px -30px 10px;
+  margin: 5px -20px 0px;
+  font-family: "Open Sans";
 }
 
 .day ul li {
@@ -184,26 +188,26 @@ select {
   background: black;
   color: white;
   font-size: 12px;
-  position: absolute;
+  position: fixed;
   margin: -25px 0px;
   padding: 5px 10px;
   border-radius: 5px;
   opacity: 0;
   display: none;
-  -webkit-transition: opacity 0.6s, display 0.6s;
-  transition: opacity 0.6s, display 0.6s;
+  -webkit-transition: opacity 0.6s;
+  transition: opacity 0.6s;
   font-weight: 100;
-  z-index: 1;
+  z-index: 2;
 }
 
 .fa-star {
-  margin: 3px 2px;
+  margin: 3px -2px;
   color: #888 !important;
   cursor: pointer;
 }
 
 .fa-link {
-  margin: 3.5px 3.5px 3.5px 10px;
+  margin: 3.5px 8px 3.5px 5px;
   color: #888 !important;
   cursor: pointer;
 }
