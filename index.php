@@ -455,6 +455,7 @@
             echo '<script>';
             echo 'var jsonData = ' . json_encode($jsonData) . ';';
             echo '</script>';
+            phpinfo();
         ?>
     
         <script src="./public/assets/js/scripts.js" async defer></script>
@@ -464,6 +465,9 @@
             function saveData() {
                 var stringedObj = JSON.stringify(jsonData);
                 window.location.href = "http://localhost:5500/save.php?data=" + stringedObj;
+            }
+            if (localStorage.getItem("month") === null) {
+                localStorage.setItem("month", "1");
             }
             var currentMonth = localStorage.getItem("month");
             var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
