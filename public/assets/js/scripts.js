@@ -290,10 +290,10 @@ function starEventListener (div, star){
         } else {
             star.setAttribute("class", "far fa-star");
         }
-        document.querySelectorAll(".day li").forEach((item) => {
+        document.querySelectorAll(".day li").forEach(item => {
             if (div.firstElementChild.textContent === item.textContent) {
-                item.nextElementSibling.nextElementSibling.removeAttribute("class");
-                item.nextElementSibling.nextElementSibling.setAttribute("class", "fas fa-star");
+                item.previousElementSibling.previousElementSibling.removeAttribute("class");
+                item.previousElementSibling.previousElementSibling.setAttribute("class", "fas fa-star");
                 if (document.querySelectorAll("#favOutput li").length === 0) {
                     addFavListItem(div);
                 } else {
@@ -363,7 +363,7 @@ function makeNodeItemSetup(index, cssPath) {
         let linkText = "";
         document.querySelectorAll(".day li").forEach(item => {
             if (gotFirst && item.textContent === node1.textContent) {
-                linkText = item.nextElementSibling.getAttribute("href");
+                linkText = item.previousElementSibling.getAttribute("href");
             }
         });
         finLink1.setAttribute("href", linkText);
@@ -590,10 +590,10 @@ document.querySelectorAll("#favOutput ul li").forEach((item) => {  // FAV Links 
     let textLink = "";
     document.querySelectorAll(".day li").forEach(item2 => {
         if (gotFirst && selectText === item2.textContent) {
-            textLink = item2.nextElementSibling.getAttribute("href");
+            textLink = item2.previousElementSibling.getAttribute("href");
             gotFirst = false;
         } else if (!gotFirst && selectText === item2.textContent) {
-            item2.nextElementSibling.setAttribute("href", textLink);
+            item2.previousElementSibling.setAttribute("href", textLink);
         }
     });
 });
