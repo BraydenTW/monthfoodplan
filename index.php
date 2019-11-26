@@ -460,7 +460,7 @@
     
         <script src="./public/assets/js/scripts.js" async defer></script>
         <script>
-        
+
             var info = jsonData[0];
             function saveData() {
                 var stringedObj = JSON.stringify(jsonData);
@@ -508,6 +508,14 @@
 
             info.month1 = cMonth1;
             info.month2 = cMonth2;
+            if ((typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)) {
+                var isMobile = true;
+            }
+            if (isMobile) {
+                document.querySelectorAll(".day button").forEach(item => {
+                    item.style.bottom = "15px";
+                });
+            }
         </script>
 
     </body>
