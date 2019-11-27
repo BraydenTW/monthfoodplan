@@ -458,7 +458,9 @@
             phpinfo();
         ?>
     
-        <script src="./public/assets/js/scripts.js" async defer></script>
+        <script src="./public/assets/js/add.js" async defer></script>
+        <script src="./public/assets/js/eventListeners.js" async defer></script>
+        <script src="./public/assets/js/render.js" async defer></script>
         <script>
 
             var info = jsonData[0];
