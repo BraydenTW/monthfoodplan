@@ -1,5 +1,10 @@
-function removeStar(div) {
+console.log(jsonData);
+var month = jsonData[currentMonth].month;
+console.log(month[1]);
+function removeStar(div) { // Listener for when turning off star icon
     document.querySelectorAll(".day li").forEach((item, index) => {
+
+        // If matches, removes all attributes that a favorite has
         if (div.firstElementChild.textContent === item.textContent) {
             item.nextElementSibling.nextElementSibling.removeAttribute("class");
             item.nextElementSibling.nextElementSibling.setAttribute("class", "far fa-star");
@@ -11,12 +16,16 @@ function removeStar(div) {
         }
     });
 }
-function addFavListItem(div) {
+function addFavListItem(div) { // Add item to favorites editor
+
+    // Creates elements and sets values
     let fav = document.createElement("LI");
     fav.appendChild(document.createTextNode(div.firstElementChild.textContent));
+
+    // Adds event listener when on click, you can edit the favorite and it's siblings
     fav.addEventListener("click", e => {
         decideModal(".edit-modal", "block");
-        document.getElementById("editFav").addEventListener("click", e => {
+        document.getElementById("editFav").addEventListener("click", e => { // Edits the favorite link button
             let selectText = fav.textContent;
             let textLink = linkEditInput.value;
             document.querySelectorAll(".day li").forEach(item => {
@@ -33,7 +42,7 @@ function addFavListItem(div) {
             });
             decideModal(".edit-modal", "none");
         });
-        document.getElementById("removeFav").addEventListener("click", e => {
+        document.getElementById("removeFav").addEventListener("click", e => { // Removes the favorite button
             let tempFavList = favs.favorites.split(",");
             tempFavList.splice(tempFavList.indexOf(fav.textContent), 1);
             fav.remove();
@@ -44,8 +53,10 @@ function addFavListItem(div) {
     favOutput.appendChild(fav);
 }
 
-function starEventListener (div, star){
+function starEventListener (div, star){ // Star event listener for when clicking on it
     if (star.getAttribute("class") === "far fa-star") { // Turn On
+
+        // Adds favorite to the JSON array and appends it
         let favArray = favs.favorites;
         favArray +=  "," + div.firstElementChild.textContent + ",";
         favs.favorites = favArray;
@@ -76,6 +87,8 @@ function starEventListener (div, star){
             
         });
     } else if (star.getAttribute("class") === "fas fa-star") { // Turn Off
+
+        // Removes it from the list
         removeStar(div);
         let tempFavList = favs.favorites.split(",");
         let removeIndex = tempFavList.indexOf(div.firstElementChild.textContent);
@@ -84,23 +97,19 @@ function starEventListener (div, star){
         favs.favorites = newList;
     }
 }
-function nodeEventListener(div, index) {
+function nodeEventListener(div, index) { // Removes the food item from list
     let removeDayIndex = div.firstElementChild.textContent;
     div.remove();
-    let tempDayList = month[index].day.food.split(",");
-    let tempLinkList = month[index].day.link.split(",");
+    let newIndex = dayToIndex(index);
+    let tempDayList = month[newIndex].day.food.split(",");
+    let tempLinkList = month[newIndex].day.link.split(",");
     tempLinkList.splice(tempDayList.indexOf(removeDayIndex), 1);
     tempDayList.splice(tempDayList.indexOf(removeDayIndex), 1);
-    month[index].day.link = tempLinkList.toString();
-    month[index].day.food = tempDayList.toString();
-    console.log(indexToDay(index));
-    if (document.querySelector("." + indexToDay(index) + " ul").childElementCount > 4) {
-        document.querySelectorAll(".day")[index].children[1].style = "display: block;";
+    month[newIndex].day.link = tempLinkList.toString();
+    month[newIndex].day.food = tempDayList.toString();
+    if (document.querySelector("." + indexToDay(newIndex) + " ul").childElementCount > 4) {
+        document.querySelectorAll(".day")[newIndex].children[1].style = "display: block;";
     } else {
-        document.querySelectorAll(".day")[index].children[1].style = "display: none;";
+        document.querySelectorAll(".day")[newIndex].children[1].style = "display: none;";
     }
 }
-document.getElementById("saveButton").addEventListener("click", () => {
-    var stringedObj = JSON.stringify(jsonData);
-    window.location.href = "http://localhost:5500/save.php?data=" + stringedObj;
-});
