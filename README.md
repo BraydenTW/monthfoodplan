@@ -8,6 +8,8 @@ This is a software where you can store all the meals/foods that you will need to
 
 2. Run index.php (make sure you have a text editor that supports a php server).
 
+(NOTE): save.php is not meant to be navigated to directly. Clicking the save button on the index.php page goes to save.php and back to the index file.
+
 Please tell me if there are any features that should be added in or any bugs that should be fixed. All the feedback helps!
 
 ## Features
