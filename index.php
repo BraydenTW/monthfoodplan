@@ -1,20 +1,44 @@
 <!DOCTYPE html>
 <html class="no-js">
     <head>
+    
+        <!-- META Tags -->
+
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Dad's Monthly Food Planner</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Other tags -->
+
+        <title>Dad's Monthly Food Planner</title>
+
+        <!-- Stylesheets -->
+        <link href="https://fonts.googleapis.com/css?family=Rubik:400,500,700,900&display=swap" rel="stylesheet"><
         <link rel="stylesheet" href="./public/assets/css/main.css">
         <link rel="stylesheet" href="./public/assets/fontawesome/css/all.min.css">
     </head>
     <body>
+        <!-- Top bar -->
         <div class="top">
-            <div class="month-title"></div>
-            <button onclick="saveData()"><i class="far fa-save fa-3x"></i></button>
+            <div class="top-items">
+                <div class="fav-hover">
+                    <i class="far fa-star fa-2x"></i>
+                    <div class="fav-bottom" id="favOutput"><ul></ul></div>
+                </div>
+                <div class="shape-bg">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                     <div class="month-title"></div>
+                </div>
+                <button id="saveButton" onclick="saveData()"><i class="far fa-save fa-3x"></i></button>
+            </div>
         </div>
-        
+
+        <!-- Weeks -->
+
         <div class="week">
             <div class="head-weekday">
                 <div class="title">Sunday</div>
@@ -446,7 +470,11 @@
             </div>
         </div>
         <div class="day-modal"></div>
-        <div class="fav-bottom" id="favOutput"><ul></ul></div>
+
+        <!-- Favorite Editor -->
+
+        <!-- PHP -->
+
         <?php
 
             $jsonFile = file_get_contents("./public/assets/js/data.json");
@@ -455,14 +483,12 @@
             echo '<script>';
             echo 'var jsonData = ' . json_encode($jsonData) . ';';
             echo '</script>';
-            phpinfo();
         ?>
-    
-        <script src="./public/assets/js/add.js" async defer></script>
-        <script src="./public/assets/js/eventListeners.js" async defer></script>
-        <script src="./public/assets/js/render.js" async defer></script>
-        <script>
 
+        <!-- JS Scripts -->
+        <script src="./public/assets/js/scripts.js"></script>
+        <script>
+            
             var info = jsonData[0];
             function saveData() {
                 var stringedObj = JSON.stringify(jsonData);
@@ -495,11 +521,16 @@
                     numDay++;
                 }
             }
+            document.querySelectorAll(".day-title").forEach((item) => {
+                if (item.textContent === "0") {
+                    let tempClass = item.parentElement.getAttribute("class");
+                    item.parentElement.setAttribute("class", tempClass + " day-off");
+                    item.parentElement.innerHTML = "";
+                }
+            });
             var cMonth1 = months[d.getMonth()];
             var cMonth2 = months[d.getMonth() + 1];
-
             const defaultMonthJson = jsonData[3].month;
-
             if (cMonth1 != info.month1) {
                 jsonData[1].month = jsonData[2].month;
                 jsonData[2].month = defaultMonthJson;
@@ -507,7 +538,6 @@
                 info.month2 = cMonth2;
                 saveData();
             }
-
             info.month1 = cMonth1;
             info.month2 = cMonth2;
             if ((typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)) {
@@ -518,7 +548,17 @@
                     item.style.bottom = "15px";
                 });
             }
-        </script>
+            document.getElementById("backMonth").addEventListener("click", () => {
+                localStorage.setItem("month", 1);
+                currentMonth = localStorage.getItem("month");
+                location.reload();
+            });
 
+            document.getElementById("forwardMonth").addEventListener("click", () => {
+                localStorage.setItem("month", 2);
+                currentMonth = localStorage.getItem("month");
+                location.reload();
+            });
+        </script>
     </body>
 </html>
