@@ -13,8 +13,8 @@ var editFavItem = "";
 function removeStar(div) {
     document.querySelectorAll(".day li").forEach((item, index) => {
         if (div.firstElementChild.textContent === item.textContent) {
-            item.nextElementSibling.nextElementSibling.removeAttribute("class");
-            item.nextElementSibling.nextElementSibling.setAttribute("class", "far fa-star");
+            item.previousElementSibling.previousElementSibling.removeAttribute("class");
+            item.previousElementSibling.previousElementSibling.setAttribute("class", "far fa-star");
             document.querySelectorAll("#favOutput li").forEach((item, index) => {
                 if (item.textContent === div.firstElementChild.textContent) {
                     item.parentElement.remove();
@@ -254,7 +254,7 @@ function addFavListItem(div) {
             let textLink = linkEditInput.value;
             document.querySelectorAll(".day li").forEach(item => {
                 if (selectText === item.textContent) {
-                    item.nextElementSibling.setAttribute("href", textLink);
+                    item.previousElementSibling.setAttribute("href", textLink);
                     let day = item.parentElement.parentElement.nextElementSibling.id;
                     let index = dayToIndex(day);
                     let foodArray = month[index].day.food.split(",");
@@ -274,7 +274,7 @@ function addFavListItem(div) {
             decideModal(".edit-modal", "none");
         });
     });
-    favOutput.appendChild(fav);
+    favOutput.firstElementChild.appendChild(fav);
 }
 
 function starEventListener (div, star){
@@ -315,6 +315,8 @@ function starEventListener (div, star){
         tempFavList.splice(removeIndex, 1);
         let newList = tempFavList.toString();
         favs.favorites = newList;
+        var stringedObj = JSON.stringify(jsonData);
+        window.location.href = "http://localhost:5500/save.php?data=" + stringedObj;
     }
 }
 function nodeEventListener(div, index) {
@@ -546,7 +548,7 @@ for (let i = 1; i < favs.favorites.split(",").length; i++) {
                 let textLink = linkEditInput.value;
                 document.querySelectorAll(".day li").forEach(item => {
                     if (selectText === item.textContent) {
-                        item.nextElementSibling.setAttribute("href", textLink);
+                        item.previousElementSibling.setAttribute("href", textLink);
                         let day = item.parentElement.parentElement.nextElementSibling.id;
                         let index = dayToIndex(day);
                         let foodArray = month[index].day.food.split(",");
