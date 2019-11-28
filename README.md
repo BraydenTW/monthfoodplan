@@ -28,6 +28,14 @@ Instead of typing in all the same information over and over, why not use a favor
 
 The use of external links are helpful with the growth of the internet. Just attach the link to a website with the recipe you want and you will be able to access it by clicking the cookbook icon.
 
+### Sets the Month Information Automatically
+
+No matter what month it is, the dates will adjust to the month's schedule. Days not included have a gray background color.
+
+### Mobile Mode for Tablets
+
+If you want to use an iPad, Samsung Tablet, Kindle, or whatever you want, the layout and hover effects are minified making it easy to use.
+
 ### Looks Nice
 
 Automatically sets the month schedule to whatever is the layout. A simple UI set to change in the near future.
@@ -35,4 +43,3 @@ Automatically sets the month schedule to whatever is the layout. A simple UI set
 ## What's coming...
 
 Oh I'll tell you what's coming! Soon, many themes will be released to the users where they can customize their calender to make them feel good.
-
