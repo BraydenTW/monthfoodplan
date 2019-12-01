@@ -500,8 +500,6 @@
             var currentMonth = localStorage.getItem("month");
             var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
             var d = new Date();
-            var monthName = months[(d.getMonth() - 1) + parseInt(currentMonth, 10)];
-            document.querySelector(".month-title").innerHTML = "<i class='fas fa-arrow-left' id='backMonth'></i><span class='month-text'>" + monthName + "</span><i class='fas fa-arrow-right' id='forwardMonth'></i>";
             var days = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
             let numDay = 1;
             let date = new Date();
@@ -535,11 +533,21 @@
                 jsonData[1].month = jsonData[2].month;
                 jsonData[2].month = defaultMonthJson;
                 info.month1 = cMonth1;
-                info.month2 = cMonth2;
+                if (d.getMonth() === 12) {
+                    info.month2 = "January";
+                } else {
+                    info.month2 = cMonth2;
+                }
                 saveData();
             }
-            info.month1 = cMonth1;
-            info.month2 = cMonth2;
+            var monthName = "";
+            if (localStorage.getItem("month") === "1") {
+                monthName = info.month1;
+            } else {
+                monthName = info.month2;
+            }
+            console.log(monthName);
+            document.querySelector(".month-title").innerHTML = "<i class='fas fa-arrow-left' id='backMonth'></i><span class='month-text'>" + monthName + "</span><i class='fas fa-arrow-right' id='forwardMonth'></i>";
             if ((typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1)) {
                 var isMobile = true;
             }
