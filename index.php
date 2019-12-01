@@ -533,12 +533,22 @@
                 jsonData[1].month = jsonData[2].month;
                 jsonData[2].month = defaultMonthJson;
                 info.month1 = cMonth1;
-                if (d.getMonth() === 12) {
+                if (d.getMonth() === 11) {
                     info.month2 = "January";
+                    console.log("yesss!")
                 } else {
                     info.month2 = cMonth2;
                 }
                 saveData();
+            }
+            if (info.month2 === undefined) {
+                console.log(d.getMonth());
+                if (d.getMonth() === 11) {
+                    info.month2 = "January";
+                    console.log("yesss!")
+                } else {
+                    info.month2 = cMonth2;
+                }
             }
             var monthName = "";
             if (localStorage.getItem("month") === "1") {
