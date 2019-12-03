@@ -321,19 +321,17 @@ function starEventListener (div, star){
 }
 function nodeEventListener(div, index) {
     let removeDayIndex = div.firstElementChild.textContent;
-    div.remove();
-    let newIndex = dayToIndex(index);
-    let tempDayList = month[newIndex].day.food.split(",");
-    let tempLinkList = month[newIndex].day.link.split(",");
+    let tempDayList = month[index].day.food.split(",");
+    let tempLinkList = month[index].day.link.split(",");
     tempLinkList.splice(tempDayList.indexOf(removeDayIndex), 1);
     tempDayList.splice(tempDayList.indexOf(removeDayIndex), 1);
-    month[newIndex].day.link = tempLinkList.toString();
-    month[newIndex].day.food = tempDayList.toString();
-    console.log(indexToDay(index));
+    month[index].day.link = tempLinkList.toString();
+    month[index].day.food = tempDayList.toString();
+    div.remove();
     if (document.querySelector("." + indexToDay(index) + " ul").childElementCount > 4) {
-        document.querySelectorAll(".day")[newIndex].children[1].style = "display: block;";
+        document.querySelectorAll(".day")[index].children[1].style = "display: block;";
     } else {
-        document.querySelectorAll(".day")[newIndex].children[1].style = "display: none;";
+        document.querySelectorAll(".day")[index].children[1].style = "display: none;";
     }
 }
 function makeNodeItemSetup(index, cssPath) {
