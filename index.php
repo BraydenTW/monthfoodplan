@@ -16,7 +16,7 @@
         <!-- Stylesheets -->
         <link href="https://fonts.googleapis.com/css?family=Rubik:400,500,700,900&display=swap" rel="stylesheet"><
         <link rel="stylesheet" href="./public/assets/css/main.css">
-        <link rel="stylesheet" href="./public/assets/fontawesome/css/all.min.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css">
     </head>
     <body>
         <!-- Top bar -->
@@ -450,7 +450,31 @@
                 <button name="submit" type="submit" id="addMeal">+ Add</button>
             </div>
         </div>
-
+        <div class="edit-item-modal">
+            <div class="modal-section">
+                <h2>Edit the Name...</h2>
+            </div>
+            <div class="modal-section">
+                <label>Meal Name:</label>
+                <input type="text" id="newItemTxt">
+            </div>
+            <div class="modal-section">
+                <h2>Edit the Recipe...</h2>
+            </div>
+            <div class="modal-section">
+                <label>Recipe Link:</label>
+                <input type="text" id="newItemRecipeTxt">
+            </div>
+            <div class="modal-section">
+                <button type="submit" id="editItemRecipe">Edit</button>
+            </div>
+            <div class="modal-section">
+                <h2>... Or remove it</h2>
+            </div>
+            <div class="modal-section">
+                <button type="submit" class="remove" id="removeItem">Remove</button>
+            </div>
+        </div>
         <div class="edit-modal">
             <div class="modal-section">
                 <h2>Edit it ...</h2>
@@ -469,7 +493,6 @@
                 <button type="submit" class="remove" id="removeFav">Remove</button>
             </div>
         </div>
-        <div class="day-modal"></div>
 
         <!-- Favorite Editor -->
 
