@@ -6,6 +6,8 @@ const checkbox = document.getElementById("enableSelect");
 const exLink = document.getElementById("exLink");
 const favOutput = document.getElementById("favOutput");
 const linkEditInput = document.getElementById("newRecipeTxt");
+const newItemTxt = document.getElementById("newItemTxt");
+const newItemRecipeTxt = document.getElementById("newItemRecipeTxt");
 var favs = jsonData[0];
 var month = jsonData[currentMonth].month;
 const favIndex = 35;
@@ -320,19 +322,40 @@ function starEventListener (div, star){
     }
 }
 function nodeEventListener(div, index) {
-    let removeDayIndex = div.firstElementChild.textContent;
-    let tempDayList = month[index].day.food.split(",");
-    let tempLinkList = month[index].day.link.split(",");
-    tempLinkList.splice(tempDayList.indexOf(removeDayIndex), 1);
-    tempDayList.splice(tempDayList.indexOf(removeDayIndex), 1);
-    month[index].day.link = tempLinkList.toString();
-    month[index].day.food = tempDayList.toString();
-    div.remove();
-    if (document.querySelector("." + indexToDay(index) + " ul").childElementCount > 4) {
-        document.querySelectorAll(".day")[index].children[1].style = "display: block;";
-    } else {
-        document.querySelectorAll(".day")[index].children[1].style = "display: none;";
-    }
+    decideModal(".edit-item-modal", "block");
+    newItemTxt.value = "";
+    newItemRecipeTxt.value = "";
+    document.getElementById("editItemRecipe").addEventListener("click", () => {
+        let newName = newItemTxt.value;
+        let newLink = newItemRecipeTxt.value;
+        if (newName != "") {
+            div.lastElementChild.textContent = newName;
+        }
+        if (newLink != "") {
+            div.children[2].setAttribute("href", newLink);
+        }
+        decideModal(".edit-item-modal", "none");
+    });
+    document.getElementById("removeItem").addEventListener("click", () => {
+        let newIndex = index;
+        if (isNaN(index)) {
+            newIndex = dayToIndex;
+        }
+        let removeDayIndex = div.firstElementChild.textContent;
+        let tempDayList = month[newIndex].day.food.split(",");
+        let tempLinkList = month[newIndex].day.link.split(",");
+        tempLinkList.splice(tempDayList.indexOf(removeDayIndex), 1);
+        tempDayList.splice(tempDayList.indexOf(removeDayIndex), 1);
+        month[newIndex].day.link = tempLinkList.toString();
+        month[newIndex].day.food = tempDayList.toString();
+        div.remove();
+        if (document.querySelector("." + indexToDay(newIndex) + " ul").childElementCount > 4) {
+            document.querySelectorAll(".day")[newIndex].children[1].style = "display: block;";
+        } else {
+            document.querySelectorAll(".day")[newIndex].children[1].style = "display: none;";
+        }
+        decideModal(".edit-item-modal", "none");
+    })
 }
 function makeNodeItemSetup(index, cssPath) {
     
@@ -423,6 +446,9 @@ function publishMeal(day, meal, link) {
 }
 
 function decideModal(name, style) {
+    document.querySelector(".edit-item-modal").style.display = "none";
+    document.querySelector(".edit-modal").style.display = "none";
+    document.querySelector(".day-modal").style.display = "none";
     document.querySelector(name).style.display = style;
     mealSelectInput.value = "";
     mealTxtInput.value = "";
