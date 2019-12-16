@@ -246,6 +246,36 @@ var indexToDay = input => {
     }
     return relDay;
 }
+document.querySelectorAll(".day").forEach((item, index) => {
+    item.setAttribute("draggable", "true");
+    item.addEventListener("drag", ev => {
+        ev.preventDefault();
+        // localStorage.setItem("day1", dayToIndex(String(ev.target.getAttribute("class").split(" ")[1])));
+        localStorage.setItem("day1", dayToIndex(String(ev.target.getAttribute("class").split(" ")[1])));
+    });
+    item.addEventListener("drop", ev => {
+        let secondIndex = localStorage.getItem("day1");
+        ev.preventDefault();
+        localStorage.setItem("data1", String(document.querySelectorAll(".day ul")[index].innerHTML));
+        localStorage.setItem("data2", String(document.querySelectorAll(".day ul")[secondIndex].innerHTML));
+        month[secondIndex].day.food = "";
+        document.querySelectorAll(".day:nth-child(" + index + 1 + ") li").forEach(item1 => {
+            month[secondIndex].day.food += "," + item1.textContent + ",";
+            console.log(month[secondIndex].day.food);
+        });
+        month[index].day.food = "";
+        document.querySelectorAll(".day:nth-child(" + secondIndex + 1 + ") li").forEach(item2 => {
+            month[index].day.food += "," + item2.textContent + ",";
+            console.log(month[index].day.food);
+        });
+        document.querySelectorAll(".day ul")[secondIndex].innerHTML = localStorage.getItem("data1");
+        document.querySelectorAll(".day ul")[index].innerHTML = localStorage.getItem("data2");
+        
+    });
+    item.addEventListener("dragover", ev => {
+        ev.preventDefault();
+    });
+});
 function addFavListItem(div) {
     let fav = document.createElement("LI");
     fav.appendChild(document.createTextNode(div.firstElementChild.textContent));
@@ -334,6 +364,13 @@ function nodeEventListener(div, index) {
         if (newLink != "") {
             div.children[2].setAttribute("href", newLink);
         }
+        let foodArray = month[index].day.food.split(",");
+        let linkArray = month[index].day.food.split(",");
+        let arrayIndex = foodArray.indexOf(div.firstElementChild.textContent);
+        foodArray[arrayIndex] = newName;
+        month[index].day.food = foodArray.toString();
+        linkArray[arrayIndex] = newLink;
+        month[index].day.link = linkArray.toString();
         decideModal(".edit-item-modal", "none");
     });
     document.getElementById("removeItem").addEventListener("click", () => {
