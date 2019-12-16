@@ -12,6 +12,10 @@ This is a software where you can store all the meals/foods that you will need to
 
 Please tell me if there are any features that should be added in or any bugs that should be fixed. All the feedback helps!
 
+## New Draggable Mode!!!
+
+In case you're feeling picky and want to move things around, just drag the days! A simple burger icon drag UI makes it easy for you to change it up!
+
 ## Features
 
 Below are the awesome features of the software.
@@ -39,7 +43,3 @@ If you want to use an iPad, Samsung Tablet, Kindle, or whatever you want, the la
 ### Looks Nice
 
 Automatically sets the month schedule to whatever is the layout. A simple UI set to change in the near future.
-
-## What's coming...
-
-Oh I'll tell you what's coming! Soon, many themes will be released to the users where they can customize their calender to make them feel good.
