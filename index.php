@@ -547,6 +547,10 @@
                     let tempClass = item.parentElement.getAttribute("class");
                     item.parentElement.setAttribute("class", tempClass + " day-off");
                     item.parentElement.innerHTML = "";
+                } else {
+                    let tempClass = item.parentElement.getAttribute("class");
+                    item.parentElement.setAttribute("class", tempClass + " drag-true");
+                    item.innerHTML = "<i class='fas fa-bars fa-1x'></i>";
                 }
             });
             var cMonth1 = months[d.getMonth()];
