@@ -258,19 +258,20 @@ document.querySelectorAll(".day").forEach((item, index) => {
         ev.preventDefault();
         localStorage.setItem("data1", String(document.querySelectorAll(".day ul")[index].innerHTML));
         localStorage.setItem("data2", String(document.querySelectorAll(".day ul")[secondIndex].innerHTML));
-        month[secondIndex].day.food = "";
-        document.querySelectorAll(".day:nth-child(" + index + 1 + ") li").forEach(item1 => {
-            month[secondIndex].day.food += "," + item1.textContent + ",";
-            console.log(month[secondIndex].day.food);
-        });
-        month[index].day.food = "";
-        document.querySelectorAll(".day:nth-child(" + secondIndex + 1 + ") li").forEach(item2 => {
-            month[index].day.food += "," + item2.textContent + ",";
-            console.log(month[index].day.food);
-        });
+
+        // index: where you are moving TO
+        // secondIndex: where you are moving FROM
         document.querySelectorAll(".day ul")[secondIndex].innerHTML = localStorage.getItem("data1");
         document.querySelectorAll(".day ul")[index].innerHTML = localStorage.getItem("data2");
-        
+
+        localStorage.setItem("json1", month[index].day.food);
+        localStorage.setItem("json2", month[secondIndex].day.food);
+        localStorage.setItem("json1.1", month[index].day.link);
+        localStorage.setItem("json2.1", month[secondIndex].day.link);
+        month[index].day.food = localStorage.getItem("json2");
+        month[index].day.link = localStorage.getItem("json2.1");
+        month[secondIndex].day.food = localStorage.getItem("json1");
+        month[secondIndex].day.link = localStorage.getItem("json1.1");
     });
     item.addEventListener("dragover", ev => {
         ev.preventDefault();
@@ -358,19 +359,19 @@ function nodeEventListener(div, index) {
     document.getElementById("editItemRecipe").addEventListener("click", () => {
         let newName = newItemTxt.value;
         let newLink = newItemRecipeTxt.value;
-        if (newName != "") {
-            div.lastElementChild.textContent = newName;
-        }
-        if (newLink != "") {
-            div.children[2].setAttribute("href", newLink);
-        }
         let foodArray = month[index].day.food.split(",");
         let linkArray = month[index].day.food.split(",");
         let arrayIndex = foodArray.indexOf(div.firstElementChild.textContent);
-        foodArray[arrayIndex] = newName;
-        month[index].day.food = foodArray.toString();
-        linkArray[arrayIndex] = newLink;
-        month[index].day.link = linkArray.toString();
+        if (newName != "") {
+            div.lastElementChild.textContent = newName;
+            foodArray[arrayIndex] = newName;
+            month[index].day.food = foodArray.toString();
+        }
+        if (newLink != "") {
+            div.children[2].setAttribute("href", newLink);
+            linkArray[arrayIndex] = newLink;
+            month[index].day.link = linkArray.toString();
+        }
         decideModal(".edit-item-modal", "none");
     });
     document.getElementById("removeItem").addEventListener("click", () => {
