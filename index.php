@@ -510,10 +510,8 @@
         <!-- PHP -->
 
         <?php
-
             $jsonFile = file_get_contents("./public/assets/js/data.json");
             $jsonData = json_decode($jsonFile, true);
-
             echo '<script>';
             echo 'var jsonData = ' . json_encode($jsonData) . ';';
             echo '</script>';
@@ -559,16 +557,7 @@
                     item.parentElement.innerHTML = "";
                 }
             });
-            var beforeDayOff = "";
-            document.querySelectorAll(".day").forEach((item, index) => {
-                console.log(item.getAttribute("class"));
-                if (item.getAttribute("class").includes("day-off")) {
-                    if (beforeDayOff === "") {
-                        beforeDayOff = index;
-                        console.log("hi");
-                    }
-                }
-            });
+            
             document.querySelectorAll(".num-week").forEach((item, index) => {
                 let week1LastDay = document.querySelectorAll(".day-title")[6].textContent;
                 let week2FirstDay = document.querySelectorAll(".day-title")[7].textContent;
@@ -578,7 +567,7 @@
                 let week4FirstDay = document.querySelectorAll(".day-title")[21].textContent;
                 let week4LastDay = document.querySelectorAll(".day-title")[27].textContent;
                 let week5FirstDay = document.querySelectorAll(".day-title")[28].textContent;
-                let week5LastDay = document.querySelectorAll(".day-title")[beforeDayOff - 1].textContent;
+                let week5LastDay = new Date(d.getYear(), d.getMonth(), 0).getDate();
                 switch (index) {
                     case 0:
                         item.textContent = "1-" + week1LastDay;
@@ -651,7 +640,6 @@
                 currentMonth = localStorage.getItem("month");
                 location.reload();
             });
-
             document.getElementById("forwardMonth").addEventListener("click", () => {
                 localStorage.setItem("month", 2);
                 currentMonth = localStorage.getItem("month");
