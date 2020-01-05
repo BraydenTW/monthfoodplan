@@ -645,6 +645,46 @@
                 currentMonth = localStorage.getItem("month");
                 location.reload();
             });
+
+            var startDay = "";
+document.querySelectorAll(".day").forEach((item, index) => {
+    if (item.innerHTML != "" && startDay === "") {
+        startDay = index;
+        console.log(index);
+    }
+});
+document.querySelectorAll(".day").forEach((item, index) => {
+    item.setAttribute("draggable", "true");
+    item.addEventListener("drag", ev => {
+        ev.preventDefault();
+        // localStorage.setItem("day1", dayToIndex(String(ev.target.getAttribute("class").split(" ")[1])));
+        localStorage.setItem("day1", dayToIndex(String(ev.target.getAttribute("class").split(" ")[1])));
+    });
+    item.addEventListener("drop", ev => {
+        let secondIndex = localStorage.getItem("day1");
+        ev.preventDefault();
+        console.log(secondIndex - startDay + 1);
+        localStorage.setItem("data1", String(document.querySelectorAll(".day ul")[index - startDay].innerHTML));
+        localStorage.setItem("data2", String(document.querySelectorAll(".day ul")[secondIndex - startDay].innerHTML));
+        console.log(String(document.querySelectorAll(".day ul")[secondIndex - startDay].innerHTML));
+        // index: where you are moving TO
+        // secondIndex: where you are moving FROM
+        document.querySelectorAll(".day ul")[secondIndex - startDay].innerHTML = localStorage.getItem("data1");
+        document.querySelectorAll(".day ul")[index - startDay].innerHTML = localStorage.getItem("data2");
+
+        localStorage.setItem("json1", month[index].day.food);
+        localStorage.setItem("json2", month[secondIndex].day.food);
+        localStorage.setItem("json1.1", month[index].day.link);
+        localStorage.setItem("json2.1", month[secondIndex].day.link);
+        month[index].day.food = localStorage.getItem("json2");
+        month[index].day.link = localStorage.getItem("json2.1");
+        month[secondIndex].day.food = localStorage.getItem("json1");
+        month[secondIndex].day.link = localStorage.getItem("json1.1");
+    });
+    item.addEventListener("dragover", ev => {
+        ev.preventDefault();
+    });
+});
         </script>
     </body>
 </html>
