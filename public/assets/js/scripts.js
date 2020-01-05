@@ -246,37 +246,7 @@ var indexToDay = input => {
     }
     return relDay;
 }
-document.querySelectorAll(".day").forEach((item, index) => {
-    item.setAttribute("draggable", "true");
-    item.addEventListener("drag", ev => {
-        ev.preventDefault();
-        // localStorage.setItem("day1", dayToIndex(String(ev.target.getAttribute("class").split(" ")[1])));
-        localStorage.setItem("day1", dayToIndex(String(ev.target.getAttribute("class").split(" ")[1])));
-    });
-    item.addEventListener("drop", ev => {
-        let secondIndex = localStorage.getItem("day1");
-        ev.preventDefault();
-        localStorage.setItem("data1", String(document.querySelectorAll(".day ul")[index].innerHTML));
-        localStorage.setItem("data2", String(document.querySelectorAll(".day ul")[secondIndex].innerHTML));
 
-        // index: where you are moving TO
-        // secondIndex: where you are moving FROM
-        document.querySelectorAll(".day ul")[secondIndex].innerHTML = localStorage.getItem("data1");
-        document.querySelectorAll(".day ul")[index].innerHTML = localStorage.getItem("data2");
-
-        localStorage.setItem("json1", month[index].day.food);
-        localStorage.setItem("json2", month[secondIndex].day.food);
-        localStorage.setItem("json1.1", month[index].day.link);
-        localStorage.setItem("json2.1", month[secondIndex].day.link);
-        month[index].day.food = localStorage.getItem("json2");
-        month[index].day.link = localStorage.getItem("json2.1");
-        month[secondIndex].day.food = localStorage.getItem("json1");
-        month[secondIndex].day.link = localStorage.getItem("json1.1");
-    });
-    item.addEventListener("dragover", ev => {
-        ev.preventDefault();
-    });
-});
 function addFavListItem(div) {
     let fav = document.createElement("LI");
     fav.appendChild(document.createTextNode(div.firstElementChild.textContent));
