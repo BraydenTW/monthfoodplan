@@ -453,6 +453,9 @@
             <div class="modal-section">
                 <button name="submit" type="submit" id="addMeal">+ Add</button>
             </div>
+            <div class="modal-section">
+                <button id="cancelMeal">Cancel</button>
+            </div>
         </div>
         <div class="edit-item-modal">
             <div class="modal-section">
@@ -478,6 +481,9 @@
             <div class="modal-section">
                 <button type="submit" class="remove" id="removeItem">Remove</button>
             </div>
+            <div class="modal-section">
+                <button id="cancelItem">Cancel</button>
+            </div>
         </div>
         <div class="edit-modal">
             <div class="modal-section">
@@ -495,6 +501,9 @@
             </div>
             <div class="modal-section">
                 <button type="submit" class="remove" id="removeFav">Remove</button>
+            </div>
+            <div class="modal-section">
+                <button id="cancelFav">Cancel</button>
             </div>
         </div>
 

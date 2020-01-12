@@ -470,6 +470,17 @@ document.querySelectorAll(".day button").forEach((item, index) => {
     });
     
 });
+
+document.querySelector("#cancelMeal").addEventListener("click", () => {
+    decideModal(".day-modal", "none");
+});
+document.querySelector("#cancelItem").addEventListener("click", () => {
+    decideModal(".edit-item-modal", "none");
+});
+document.querySelector("#cancelFav").addEventListener("click", () => {
+    decideModal(".edit-modal", "none");
+});
+
 checkbox.addEventListener("change", () => {
     if (checkbox.checked === true) {
         if (mealSelectInput.childElementCount === 0) {
