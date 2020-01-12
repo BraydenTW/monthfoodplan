@@ -63,13 +63,6 @@
                 </div>
             </div>
             <div class="flex-group">
-            <div class="num-week-section">
-                <div class="num-week1 top-num-week"><div class="num-week"></div></div>
-                <div class="num-week2 top-num-week"><div class="num-week"></div></div>
-                <div class="num-week3 top-num-week"><div class="num-week"></div></div>
-                <div class="num-week4 top-num-week"><div class="num-week"></div></div>
-                <div class="num-week5 top-num-week"><div class="num-week"></div></div>
-            </div>
             <div class="month">
                 <div class="week" id="week">
                     <div class="day sunday1">
@@ -558,43 +551,9 @@
                 }
             });
             
-            document.querySelectorAll(".num-week").forEach((item, index) => {
-                let week1LastDay = document.querySelectorAll(".day-title")[6].textContent;
-                let week2FirstDay = document.querySelectorAll(".day-title")[7].textContent;
-                let week2LastDay = document.querySelectorAll(".day-title")[13].textContent;
-                let week3FirstDay = document.querySelectorAll(".day-title")[14].textContent;
-                let week3LastDay = document.querySelectorAll(".day-title")[20].textContent;
-                let week4FirstDay = document.querySelectorAll(".day-title")[21].textContent;
-                let week4LastDay = document.querySelectorAll(".day-title")[27].textContent;
-                let week5FirstDay = document.querySelectorAll(".day-title")[28].textContent;
-                let week5LastDay = new Date(d.getYear(), d.getMonth(), 0).getDate();
-                switch (index) {
-                    case 0:
-                        item.textContent = "1-" + week1LastDay;
-                        break;
-                        
-                    case 1:
-                        item.textContent = week2FirstDay + "-" + week2LastDay;
-                        break;
-                        
-                    case 2:
-                        item.textContent = week3FirstDay + "-" + week3LastDay;
-                        break;
-                        
-                    case 3:
-                        item.textContent = week4FirstDay + "-" + week4LastDay;
-                        break;
-                        
-                    case 4:
-                        item.textContent = week5FirstDay + "-" + week5LastDay;
-                        break;
-                }
-            });
-            
             document.querySelectorAll(".day-title").forEach((item) => {
                 let tempClass = item.parentElement.getAttribute("class");
                 item.parentElement.setAttribute("class", tempClass + " drag-true");
-                item.innerHTML = "<i class='fas fa-bars fa-1x'></i>";
             });
             var cMonth1 = months[d.getMonth()];
             var cMonth2 = months[d.getMonth() + 1];
@@ -605,7 +564,6 @@
                 info.month1 = cMonth1;
                 if (d.getMonth() === 11) {
                     info.month2 = "January";
-                    console.log("yesss!")
                 } else {
                     info.month2 = cMonth2;
                 }
