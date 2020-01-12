@@ -2,6 +2,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Rubik";
+  background: white;
 }
 .top{
   width: 100%;
@@ -20,41 +21,42 @@ body {
   position: relative;
   overflow: hidden;
   margin: 15px 40px;
+  background: white;
   border-radius: 40px;
-  box-shadow: 0px 7px 15px #ccc;
+  box-shadow: -4px -4px 10px white, 4px 4px 10px #666;
 }
 .shape-bg div{
   border-radius: 50%;
   position: absolute;
 }
 .shape-bg div:nth-child(1){
-  background: linear-gradient(to top, #e67e22 10%, #f6e58d);
+  background: linear-gradient(to top, #eb4d4b 10%, #ff7979);
   height: 60px;
   width: 60px;
   top: 10px;
 }
 .shape-bg div:nth-child(2){
-  background: linear-gradient(to top, #2ecc71 10%, #81ecec);
+  background: linear-gradient(to top, #0abde3 10%, #48dbfb);
   height: 30px;
   width: 30px;
   top: 5px;
   left: 40px;
 }
 .shape-bg div:nth-child(3){
-  background: linear-gradient(to top, #341f97 10%, #9b59b6);
+  background: linear-gradient(to top, #eb4d4b 10%, #ff7979);
   height: 35px;
   width: 35px;
   right: 40px;
   top: 20px;
-  z-index: -1;
+  z-index: 0;
 }
 .shape-bg div:nth-child(4){
-  background: linear-gradient(to top, #be2edd 10%, #eb4d4b);
+  background: linear-gradient(to top, #0abde3 10%, #48dbfb);
   height: 80px;
   width: 80px;
   right: -10px;
   top: -30px;
-  z-index: -2;
+  z-index: 0;
 }
 .month-title {
   font-size: 32px;
@@ -67,12 +69,15 @@ body {
 .month-title .month-text {
   font-weight: 600;
   padding: 50px 60px;
+  color: #eb4d4b;
+  text-shadow: 2px 2px white, 5px 5px #48dbfb;
 }
 
 .month-title i {
   color: white !important;
   text-shadow: 3px 3px 10px #777;
   cursor: pointer;
+  z-index: 2;
 }
 
 .top-items button {
@@ -230,9 +235,6 @@ body {
   margin: auto;
   width: 1590px;
 }
-.flex-group{
-  display: flex;
-}
 .day-title {
   font-weight: 600;
   font-size: 22px;
@@ -305,9 +307,6 @@ select {
 .modal-section {
   margin: 20px 15px;
 }
-.weekday-week{
-  padding: 0px 112px;
-}
 .day ul div {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -346,25 +345,6 @@ select {
 }
 .day i{
   text-shadow: 2px 2px 10px #ccc;
-}
-.num-week-section{
-  display: inline;
-}
-.top-num-week{
-  border: solid #ccc;
-  height: 130px;
-  width: 60px;
-  margin: 7px 15px 14px;
-  padding: 5px 8px;
-  border-radius: 10px;
-  font-weight: 700;
-  box-shadow: 0px 4px 15px #ccc;
-}
-.num-week{
-  text-align: center;
-  width: 60px;
-  margin-top: 58px;
-  font-size: 1.15em;
 }
 .fa-star {
   margin: 3px -2px;
